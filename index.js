@@ -52,7 +52,21 @@ app.put('/api/courses/:id',(req, res) => {
     course = course[0];
     course.name = req.body.name;
     res.send(course);
-})
+});
+
+app.delete('/api/courses/:id',(req,res)=>{
+    let id = parseInt(req.params.id);
+    let course = courses.filter(c => c.id === id);
+    if(!course.length){
+        res.status(404).send('id not found');
+        return;
+    }
+    course = course[0];
+    const index = courses.indexOf(course);
+    courses.splice(index,1);
+    res.send(course);
+    
+});
 
 function validateCourse(course){
     const schema = Joi.object().keys({
