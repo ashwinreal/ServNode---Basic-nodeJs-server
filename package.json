@@ -16,7 +16,8 @@
     "helmet": "^3.14.0",
     "joi": "^13.7.0",
     "mongoose": "^5.3.2",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "pug": "^2.0.3"
   },
   "devDependencies": {
     "jshint": "^2.9.6",
