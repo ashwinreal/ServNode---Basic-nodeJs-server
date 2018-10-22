@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const config = require('config');
 const courses = require('./routes/courses');
 const home = require('./routes/home');
+const student = require('./routes/student');
 const app = express();
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/express-demo').then((res) => {
@@ -24,7 +25,9 @@ app.use(require('./middleware/logger'));
 
 
 app.use('/api/courses', courses);
+app.use('/api/students',  student);
 app.use('/',home);
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

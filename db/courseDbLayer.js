@@ -1,9 +1,4 @@
 const mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost/express-demo').then((res) => {
-//     console.log('connected to MongoDB');
-// }).catch((err) => {
-//     console.log(err);
-// });
 
 const schema = mongoose.Schema({
     name: {
