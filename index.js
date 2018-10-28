@@ -5,6 +5,8 @@ const config = require('config');
 const courses = require('./routes/courses');
 const home = require('./routes/home');
 const student = require('./routes/student');
+const user = require('./routes/users');
+const login = require('./routes/auth');
 const app = express();
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/express-demo').then((res) => {
@@ -26,6 +28,8 @@ app.use(require('./middleware/logger'));
 
 app.use('/api/courses', courses);
 app.use('/api/students',  student);
+app.use('/api/users', user);
+app.use('/api/logins', login);
 app.use('/',home);
 
 
