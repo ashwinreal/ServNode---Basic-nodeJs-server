@@ -3,6 +3,7 @@ const router = express.Router();
 const Joi = require('joi');
 const studentDbManager = require('../db/studentDbLayer');
 const auth = require('../middleware/auth');
+const admin = require('../middleware/admin');
 
 router.get('/', async (req, res) => {
     const student = await studentDbManager.getStudents();
@@ -44,7 +45,7 @@ router.put('/:id', async (req, res) => {
     res.send(student);
 });
 
-router.delete('/:id', async (req,res)=>{
+router.delete('/:id', [auth, admin], async (req,res)=>{
     let id = req.params.id;
     let student = await studentDbManager.deleteStudent(id);
     if(!student){

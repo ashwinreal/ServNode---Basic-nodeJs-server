@@ -15,12 +15,15 @@ const schema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    isAdmin: {
+        type: Boolean
     }
 
 });
 
 schema.methods.generateAuthToken = function(){
-    const token  = jwt.sign({ _id: this._id}, 'jwtPrivateKey'); //TODO: store private key to an env variable
+    const token  = jwt.sign({ _id: this._id, isAdmin: this.isAdmin}, 'jwtPrivateKey'); //TODO: store private key to an env variable
     return token;
 }
 
