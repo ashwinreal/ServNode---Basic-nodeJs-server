@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 
-const schema = mongoose.Schema({
+const schema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -17,6 +18,11 @@ const schema = mongoose.Schema({
     }
 
 });
+
+schema.methods.generateAuthToken = function(){
+    const token  = jwt.sign({ _id: this._id}, 'jwtPrivateKey'); //TODO: store private key to an env variable
+    return token;
+}
 
 const User = mongoose.model('User',schema);
 

@@ -15,7 +15,8 @@ router.post('/', async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         req.body.password = await bcrypt.hash(req.body.password, salt) 
         const user = await userDbManager.createUser(req.body);
-        res.send(_.pick(user, ['_id', 'name', 'email']));
+        const token  = user.generateAuthToken();
+        res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email']));
     }catch(ex){
         res.status(500).send('Internal Error Occurred');
         console.log(ex);

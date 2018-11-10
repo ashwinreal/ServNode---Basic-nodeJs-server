@@ -23,7 +23,8 @@ router.post('/', async (req, res) => {
         res.status(400).send('Wrong Username or Password');
         return;
     }
-    res.send(true);
+    const token  = user.generateAuthToken();
+    res.send(token);
 });
 
 function validateLogin(obj){
