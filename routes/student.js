@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
 const studentDbManager = require('../db/studentDbLayer');
+const auth = require('../middleware/auth');
 
 router.get('/', async (req, res) => {
     const student = await studentDbManager.getStudents();
@@ -18,7 +19,7 @@ router.get('/:id', async (req, res) => {
     res.send(student);
 });
 
-router.post('/', async (req, res) => {
+router.post('/',auth, async (req, res) => {
     const valRes = validateStudent(req.body);
     if(valRes.error){
         res.status(400).send('Input validation failed. '+valRes.error);
