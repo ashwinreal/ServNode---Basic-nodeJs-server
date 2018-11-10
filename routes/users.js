@@ -4,6 +4,13 @@ const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
 const userDbManager = require('../db/userDbLayer');
+const auth = require('../middleware/auth');
+
+router.get('/me', auth, async (req, res)=>{
+    // req.user is comming from the middleware, not the payload
+    const user = await userDbManager.getUser(req.user._id);
+    res.send(_.pick(user, ['_id', 'name']));
+})
 
 router.post('/', async (req, res) => {
     try {
