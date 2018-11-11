@@ -32,7 +32,10 @@ app.use('/api/users', user);
 app.use('/api/logins', login);
 app.use('/',home);
 
-
+// error middleware
+app.use((err, req, res, next) => {
+    res.status(500).send('Something is wrong');
+})
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`listening on port ${PORT}`);
